@@ -16,7 +16,7 @@ int main() {
 	for (int i = 0; i < num_turns;i++) { 
 		printf("Which do you choose? rock, paper, or scissors? "); 
 		scanf("%s", &user_choice); 
-		game_status = game(&user_choice); 
+		game_status = game(user_choice); 
 		if (game_status == 1) {
 			human_score = human_score + 1; 
 		} 
@@ -37,10 +37,9 @@ int main() {
 	return 0;
 }
 
-int game(char* input) { 
-	char machineInput[10]; 
-	char userInput[10];
- 
+int game(char input[64]) { 
+	char machineInput[64]; 
+	char userInput[64];
 	strcpy(userInput, input); 
 	int randNum = rand() % 3; 
 	if (randNum == 0) {
@@ -98,6 +97,6 @@ int game(char* input) {
 			return 0; 
 		}
 	}	
-
+ 
 }
 
