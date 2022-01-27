@@ -2,7 +2,7 @@
 #include <string.h> 
 
 int main() {
-	char input[100]; 
+	char input[128]; 
 	printf("Enter a word: \n"); 
 	scanf("%s", input);
 	for (int i = 0; i < strlen(input); i++) {
