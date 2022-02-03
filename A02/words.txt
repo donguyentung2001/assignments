@@ -1,0 +1,7 @@
+6
+hello
+beginning
+world
+love
+beauty
+software
