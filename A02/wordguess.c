@@ -72,6 +72,8 @@ int main() {
   printf("%s\n", current_word); 
   printf("You have won in %i turns. \n", turn); 
 
+  fclose(infile); 
+
 
   return 0; 
 }
