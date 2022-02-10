@@ -20,7 +20,7 @@ int main() {
       }
     }
   }
-  output[strlen(input)*count+1] = '\0'; 
+  output[strlen(input)*count] = '\0'; 
   printf("%s", output); 
 
   free(output); 
