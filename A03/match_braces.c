@@ -23,6 +23,10 @@ struct node {
 // Returns the new top of the stack
 struct node* push(char sym, int line, int col, struct node* top) {
   struct node* new_node = malloc(sizeof(struct node)); 
+  if (new_node == NULL) { 
+    printf("Out of space. \n"); 
+    exit(1);
+  }
   new_node->sym = sym; 
   new_node->linenum = line; 
   new_node->colnum = col; 
@@ -35,8 +39,12 @@ struct node* push(char sym, int line, int col, struct node* top) {
 // Returns the new top of the stack
 struct node* pop(struct node* top) {
   struct node* new_node = malloc(sizeof(struct node)); 
-  free(top);
+  if (new_node == NULL) { 
+    printf("Out of space. \n"); 
+    exit(1);
+  }
   new_node = top->next; 
+  free(top);
   top = NULL; 
   return new_node; 
 }

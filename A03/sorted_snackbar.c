@@ -63,6 +63,7 @@ void clear(struct node* list) {
     curr = next;
   }
 }
+
 int main() {
   char name[32]; 
   float cost; 

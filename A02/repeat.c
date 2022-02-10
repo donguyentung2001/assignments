@@ -12,6 +12,7 @@ int main() {
   char* output = malloc(sizeof(char)*strlen(input)*count+1); 
   if (output == NULL) { 
     printf("Cannot allocate new string. Exiting... \n"); 
+    exit(1);
   }
   else { 
     for (int i =0; i < count; i++) { 
