@@ -3,6 +3,7 @@
 #include <string.h> 
 #include <time.h>
 #include <stdbool.h>
+
 int main() {
   int num_words; 
   char buffer[1024];  
