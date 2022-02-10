@@ -39,10 +39,6 @@ struct node* push(char sym, int line, int col, struct node* top) {
 // Returns the new top of the stack
 struct node* pop(struct node* top) {
   struct node* new_node = top->next;
-  if (new_node == NULL) { 
-    printf("Out of space. \n"); 
-    exit(1);
-  }
   free(top);
   top = NULL; 
   return new_node; 
