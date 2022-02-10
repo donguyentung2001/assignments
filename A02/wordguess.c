@@ -32,13 +32,8 @@ int main() {
       sscanf(buffer, "%s", word); 
     }
   }
-
-  char* current_word = malloc(sizeof(char)*strlen(word)*2); 
-  
-  if (current_word == NULL) { 
-    printf("Cannot allocate memory. Exiting"); 
-    exit(1); 
-  }
+  int length_word = (sizeof(char)*strlen(word)*2); 
+  char current_word[length_word]; 
 
   for (int i = 0; i < strlen(word)*2; i++) { 
     if (i % 2 == 0) {
@@ -77,8 +72,6 @@ int main() {
   printf("%s\n", current_word); 
   printf("You have won in %i turns. \n", turn); 
 
-  free(current_word); 
-  current_word = NULL; 
 
   return 0; 
 }
