@@ -9,7 +9,7 @@ int main() {
   scanf("%s", input); 
   printf("Enter a count: "); 
   scanf("%i", &count); 
-  char* output = malloc(sizeof(char)*strlen(input)*count); 
+  char* output = malloc(sizeof(char)*strlen(input)*count+1); 
   if (output == NULL) { 
     printf("Cannot allocate new string. Exiting... \n"); 
   }
@@ -20,6 +20,7 @@ int main() {
       }
     }
   }
+  output[strlen(input)*count+1] = '\0'; 
   printf("%s", output); 
 
   free(output); 

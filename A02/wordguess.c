@@ -9,7 +9,7 @@ int main() {
   char buffer[1024];  
   char word[528]; 
   int turn = 0;
-  bool is_over = false;
+  int is_over = 0;
   char guess; 
   FILE *infile = fopen("words.txt", "r");
 
@@ -51,7 +51,7 @@ int main() {
 
   printf("Welcome to Guess Word.\n");
 
-  while (!is_over) { 
+  while (is_over != 1) { 
     turn += 1; 
     bool found = false; 
     printf("Turn: %d \n", turn);
@@ -67,10 +67,10 @@ int main() {
     if (!found) { 
       printf("Sorry, %c not found\n", guess); 
     }
-    is_over = true; 
+    is_over = 1; 
     for (int i = 0; i < strlen(word); i++) { 
       if (current_word[i*2] == '_') { 
-        is_over = false; 
+        is_over = 0; 
       }
     }
   }
