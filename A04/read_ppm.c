@@ -51,13 +51,6 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
     current_pixel.blue = b; 
     ppm_list[i] = current_pixel; 
   }
-  for (int i = 0; i < (*h); i++) { 
-    for (int j = 0; j < (*w); j++) { 
-      current_pixel = ppm_list[i*(*w) + j]; 
-      printf("(%u, %u, %u) ", current_pixel.red, current_pixel.green, current_pixel.blue); 
-    }
-    printf("\n");
-  }
 
   fclose(fp); 
   return ppm_list;
