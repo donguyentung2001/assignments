@@ -13,7 +13,7 @@ int main() {
   for (int i = 0; i < h; i++) { 
     for (int j = 0; j < w; j++) { 
       current_pixel = pixel_pointer[i*w + j]; 
-      printf("(%u, %u, %u) ", current_pixel.red, current_pixel.green, current_pixel.blue); 
+      printf("(%hhu, %hhu, %hhu) ", current_pixel.red, current_pixel.green, current_pixel.blue); 
     }
     printf("\n");
   }

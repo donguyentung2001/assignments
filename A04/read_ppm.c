@@ -9,9 +9,9 @@
 
 struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
   char buffer[1024]; 
-  unsigned int r; 
-  unsigned int g; 
-  unsigned int b; 
+  unsigned char r; 
+  unsigned char g; 
+  unsigned char b; 
   char current[1024]; 
   int row; 
   int col; 
@@ -45,7 +45,7 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
     return NULL; 
   }
   for (int i = 0; i < (*w)*(*h); i++) { 
-    fscanf(fp, " %u %u %u", &r, &g, &b); 
+    fscanf(fp, " %hhu %hhu %hhu", &r, &g, &b); 
     current_pixel.red = r; 
     current_pixel.green = g; 
     current_pixel.blue = b; 
