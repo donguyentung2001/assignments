@@ -58,6 +58,8 @@ int main(int argc, char** argv) {
     }
     printf("\n");
   }
+  free(pixel_pointer);
+  pixel_pointer = NULL;
   return 0;
 }
 
