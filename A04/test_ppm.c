@@ -9,7 +9,7 @@ int main() {
   int w;
   int h; 
   pixel_pointer = read_ppm("feep-ascii.ppm", &w, &h); 
-
+  printf("Testing file feep-ascii.ppm: %i %i. \n", w, h); 
   for (int i = 0; i < h; i++) { 
     for (int j = 0; j < w; j++) { 
       current_pixel = pixel_pointer[i*w + j]; 

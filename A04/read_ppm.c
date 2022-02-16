@@ -36,7 +36,6 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
   sscanf(buffer, "%i %i", &row, &col); 
   *w = row; 
   *h = col; 
-  printf("Assigning row = %i and col = %i done \n", *w, *h);
   fgets(buffer, 1024, fp); 
 
   struct ppm_pixel* ppm_list = malloc(sizeof(struct ppm_pixel)*(*w)*(*h));
