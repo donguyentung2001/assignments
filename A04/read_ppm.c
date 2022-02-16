@@ -58,6 +58,8 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
     }
     printf("\n");
   }
+
+  fclose(fp); 
   return ppm_list;
 }
 
