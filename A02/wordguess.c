@@ -32,6 +32,7 @@ int main() {
       sscanf(buffer, "%s", word); 
     }
   }
+  
   int length_word = (sizeof(char)*strlen(word)*2); 
   char current_word[length_word]; 
 
