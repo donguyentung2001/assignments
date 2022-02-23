@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
     exit(1); 
   }
 
-  char *name = malloc(strlen(argv[1]) + 7); 
+  char *name = malloc(strlen(argv[1]) + 8); 
   for (int i = 0; i < strlen(argv[1]); i++) { 
     if (i < strlen(argv[1]) - 4) { 
       name[i] = argv[1][i];
