@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
       name[i+7] = argv[1][i]; 
     }
   } 
-  name[strlen(argv[1]) + 7] = "\0"; 
+  name[strlen(argv[1]) + 7] = '\0'; 
   printf("%s \n", name);
 
   struct ppm_pixel* pixel_pointer; 
