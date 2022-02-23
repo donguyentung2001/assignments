@@ -23,11 +23,9 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
   fgets(buffer, 1024, fp); 
   sscanf(buffer, "%s", current); 
   fgets(buffer, 1024, fp); 
-  printf("%s \n", current); 
   sscanf(buffer, "%s", current); 
 
   while(current[0] == '#') { 
-    printf("Spotting and skipping comments. \n"); 
     fgets(buffer, 1024, fp); 
     sscanf(buffer, "%s", current); 
   }
