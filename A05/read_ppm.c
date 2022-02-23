@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "read_ppm.h"
+#include <time.h>
 
 // TODO: Implement this function
 // Feel free to change the function signature if you prefer to implement an 
@@ -14,6 +15,7 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
   struct ppm_pixel current_pixel; 
 
   FILE *fp = fopen(filename, "rb"); 
+
   if (!fp) { 
     printf("Unable to open file. \n"); 
     return NULL; 
@@ -52,5 +54,25 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
 // Feel free to change the function signature if you prefer to implement an 
 // array of arrays
 extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h) {
+  srand(time(NULL));
+  struct ppm_pixel current_pixel;
+
+  FILE* outputFile = fopen(filename, "wb"); 
+
+  if (!outputFile) { 
+    printf("cannot create file. \n"); 
+    exit(1); 
+  }
+
+  fprintf(outputFile, "%s\n%d %d\n%d\n", "P6", w, h, 255);
+  for (int i = 0; i < (w)*(h); i++) { 
+    current_pixel = pxs[i]; 
+    current_pixel.red = current_pixel.red << (rand() % 5); 
+    current_pixel.green = current_pixel.green << (rand() % 5); 
+    current_pixel.blue = current_pixel.blue << (rand() % 5); 
+    fwrite(&current_pixel, 3, 1, outputFile); 
+  }
+  
+  fclose(outputFile);
 
 }
