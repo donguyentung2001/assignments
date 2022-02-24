@@ -27,7 +27,20 @@ int main() {
   cake1.next = &cake2;
   cake2.next = &cake3;
   cake3.next = &cake4;  
+
+  struct cake currentCake = cake1; 
+  struct cake minCake = cake1; 
   // draw stack and heap here
+  for (int i = 0; i < 4; i++) { 
+    if (currentCake.cost < minCake.cost) { 
+      minCake = currentCake; 
+    }
+    printf("cake: %s ($%f) \n", currentCake.flavor, currentCake.cost); 
+    if (currentCake.next != NULL) { 
+      currentCake = *(currentCake.next); 
+    }
+  }
+  printf("cheapest cake is %s \n", minCake.flavor); 
 
   // todo: call cheapestCake
 }
