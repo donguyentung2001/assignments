@@ -21,10 +21,12 @@ int main() {
   struct cake cake1 = makeCake("red velvet", 2.00);
   struct cake cake2 = makeCake("chocolate", 1.75);
   struct cake cake3 = makeCake("mocha", 3.50);
+  struct cake cake4= makeCake("cream", 3.0); 
   // todo: define 4th cake
 
   cake1.next = &cake2;
   cake2.next = &cake3;
+  cake3.next = &cake4;  
   // draw stack and heap here
 
   // todo: call cheapestCake
