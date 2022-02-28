@@ -61,13 +61,13 @@ extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h,
   char* decoded_binary = malloc(sizeof(char)*(w*h+1)); 
   for (int i = 0; i < strlen(input_string); i++) { 
     result = input_string[i] & maskLeast; 
-    if (result == 0) { 
-      decoded_binary[count] = '0'; 
-    }
-    else { 
-      decoded_binary[count] = '1';  
-    }
-    count += 1;
+    //if (result == 0) { 
+    //  decoded_binary[count] = '0'; 
+    //}
+    //else { 
+    //  decoded_binary[count] = '1';  
+    //}
+    //count += 1;
   }
   FILE* outputFile = fopen(filename, "wb"); 
 
