@@ -55,7 +55,7 @@ extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h,
   srand(time(NULL));
   struct ppm_pixel current_pixel;
   unsigned int maskLeast = 0x0001;
-  unsigned int result; 
+  //unsigned int result; 
   //int count = 0; 
 
   char* decoded_binary = malloc(sizeof(char)*(w*h+1)); 
