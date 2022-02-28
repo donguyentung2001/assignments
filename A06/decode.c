@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
   pixel_pointer = read_ppm(argv[1], &w, &h); 
   printf("Testing file %s with width %i and height %i. \n", argv[1], w, h); 
 
-  char* output = malloc(sizeof(char)*(((w*h*3)/8)+1)); 
+  char* output = malloc(sizeof(char)*(((w*h*3)/8))); 
 
   if (!output) { 
     printf("Cannot allocate memory. \n"); 
