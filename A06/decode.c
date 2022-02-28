@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     }
   }
   
-  output[(w*h*3)/8+1] = '\0'; 
+  output[(w*h*3)/8] = '\0'; 
   printf("Max number of characters in the image: %i. \n", (w*h*3)/8);
   printf("%s \n", output); 
   free(pixel_pointer); 
