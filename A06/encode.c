@@ -11,16 +11,17 @@ int main(int argc, char** argv) {
 
   char *name = malloc(strlen(argv[1]) + 9); 
 
+  if (!name) { 
+    printf("Cannot allocate memory. \n"); 
+    exit(1); 
+  }
+
   int count = 0; 
   int color_count = 0; 
   int pixel_index = 0; 
   unsigned char maskLeast = 0x01;
   unsigned char result;
   
-  if (!name) { 
-    printf("Cannot allocate memory. \n"); 
-    exit(1); 
-  }
   for (int i = 0; i < strlen(argv[1]); i++) { 
     if (i < strlen(argv[1]) - 4) { 
       name[i] = argv[1][i];
