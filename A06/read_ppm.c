@@ -67,7 +67,6 @@ extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h,
     exit(1); 
   }
   for (int i = 0; i < strlen(input_string); i++) { 
-    printf("%i \n", i); 
     for (int j = 0; j < 8; j++) { 
       result = (input_string[i] >> (7-j)) & maskLeast; 
       if (result == 0) { 
