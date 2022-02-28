@@ -51,10 +51,20 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
 // TODO: Implement this function
 // Feel free to change the function signature if you prefer to implement an 
 // array of arrays
-extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h) {
+extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h, const char* input_string) {
   srand(time(NULL));
   struct ppm_pixel current_pixel;
+  unsigned int maskLeast = 0x0001;
+  unsigned int result; 
+  int count = 0; 
 
+  char* decoded_binary = malloc(sizeof(char)*(w*h+1)); 
+  for (int i = 0; i < strlen(input_string); i++) { 
+    result = input_string[i] & maskLeast; 
+    if (result == 0) { 
+      decoded_binary = 
+    }
+  }
   FILE* outputFile = fopen(filename, "wb"); 
 
   if (!outputFile) { 
@@ -71,5 +81,8 @@ extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h)
     fwrite(&current_pixel, 3, 1, outputFile); 
   }
   
+  free(decoded_binary); 
+  decoded_binary = NULL; 
+
   fclose(outputFile);
 }
