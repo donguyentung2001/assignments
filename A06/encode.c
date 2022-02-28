@@ -10,6 +10,11 @@ int main(int argc, char** argv) {
   }
 
   char *name = malloc(strlen(argv[1]) + 9); 
+  
+  if (!name) { 
+    printf("Cannot allocate memory. \n"); 
+    exit(1); 
+  }
   for (int i = 0; i < strlen(argv[1]); i++) { 
     if (i < strlen(argv[1]) - 4) { 
       name[i] = argv[1][i];

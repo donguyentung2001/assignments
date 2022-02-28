@@ -61,6 +61,11 @@ extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h,
   int pixel_index = 0;
 
   char* decoded_binary = malloc(sizeof(char)*(w*h*3+1)); 
+
+  if (!decoded_binary) { 
+    printf("Cannot allocate memory. \n"); 
+    exit(1); 
+  }
   for (int i = 0; i < strlen(input_string); i++) { 
     printf("%i \n", i); 
     for (int j = 0; j < 8; j++) { 
@@ -80,8 +85,6 @@ extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h,
     count += 1; 
   }
   decoded_binary[count] = '\0'; 
-
-  printf("Decoded string is %s. \n", decoded_binary); 
 
   FILE* outputFile = fopen(filename, "wb"); 
 
