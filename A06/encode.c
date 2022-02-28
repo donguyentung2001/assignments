@@ -10,6 +10,12 @@ int main(int argc, char** argv) {
   }
 
   char *name = malloc(strlen(argv[1]) + 9); 
+
+  int count = 0; 
+  int color_count = 0; 
+  int pixel_index = 0; 
+  unsigned char maskLeast = 0x01;
+  unsigned char result;
   
   if (!name) { 
     printf("Cannot allocate memory. \n"); 
@@ -54,7 +60,62 @@ int main(int argc, char** argv) {
   printf("Enter a phrase: "); 
   fgets(input, (w*h*3)/8, stdin); 
 
-  write_ppm(name, pixel_pointer, w, h, input);
+  char* decoded_binary = malloc(sizeof(char)*(w*h*3+1)); 
+
+  if (!decoded_binary) { 
+    printf("Cannot allocate memory. \n"); 
+    exit(1); 
+  }
+
+  for (int i = 0; i < strlen(input); i++) { 
+    for (int j = 0; j < 8; j++) { 
+      result = (input[i] >> (7-j)) & maskLeast; 
+      if (result == 0) { 
+        decoded_binary[count] = '0'; 
+      }
+      else { 
+        decoded_binary[count] = '1';  
+      }
+      count += 1;
+    }
+  }
+  //add null terminated string
+  for (int i = 0; i < 8; i++) { 
+    decoded_binary[count] = '0'; 
+    count += 1; 
+  }
+  decoded_binary[count] = '\0'; 
+
+
+  for (int i = 0; i < count; i++) { 
+    if (decoded_binary[i] == '0') { 
+      if (pixel_pointer[pixel_index].colors[color_count] % 2 == 1) { 
+        if (pixel_pointer[pixel_index].colors[color_count] < 255) { 
+          pixel_pointer[pixel_index].colors[color_count] += 1; 
+        }
+        else { 
+          pixel_pointer[pixel_index].colors[color_count] -= 1; 
+        }
+      }
+    }
+    else { 
+      if (pixel_pointer[pixel_index].colors[color_count] % 2 == 0) { 
+        if (pixel_pointer[pixel_index].colors[color_count] < 255) { 
+          pixel_pointer[pixel_index].colors[color_count] += 1; 
+        }
+        else { 
+          pixel_pointer[pixel_index].colors[color_count] -= 1; 
+        }
+      }
+    }
+    color_count += 1; 
+    if (color_count == 3) { 
+      color_count = 0; 
+      pixel_index += 1; 
+    }
+  }
+
+  write_ppm(name, pixel_pointer, w, h); 
 
   free(pixel_pointer); 
   pixel_pointer = NULL; 
@@ -62,6 +123,8 @@ int main(int argc, char** argv) {
   name = NULL; 
   free(input); 
   input = NULL; 
+  free(decoded_binary); 
+  decoded_binary = NULL; 
   
   return 0;
 }
