@@ -54,7 +54,7 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
 extern void write_ppm(const char* filename, struct ppm_pixel* pxs, int w, int h, const char* input_string) {
   srand(time(NULL));
   struct ppm_pixel current_pixel;
-  unsigned int maskLeast = 0x0001;
+  //unsigned int maskLeast = 0x0001;
   //unsigned int result; 
   //int count = 0; 
 
