@@ -31,13 +31,19 @@ int main(int argc, char** argv) {
   name[strlen(argv[1]) + 7] = '\0'; 
 
   struct ppm_pixel* pixel_pointer; 
-
+  
   // todo: call read_ppm
   int w;
   int h; 
   pixel_pointer = read_ppm(argv[1], &w, &h); 
   printf("Reading file %s with width %i and height %i. \n", argv[1], w, h); 
   printf("Writing file %s \n", name); 
+
+  for (int i=0; i < w*h; i++) { ; 
+    pixel_pointer[i].red = pixel_pointer[i].red << (rand() % 5); 
+    pixel_pointer[i].green = pixel_pointer[i].green << (rand() % 5); 
+    pixel_pointer[i].blue = pixel_pointer[i].blue << (rand() % 5); 
+  }
 
   write_ppm(name, pixel_pointer, w, h); 
   free(pixel_pointer); 
