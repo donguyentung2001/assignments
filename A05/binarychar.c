@@ -11,8 +11,8 @@ int main() {
     if (input[i] == '1') { 
       add = 1; 
       add = add << (7-i); 
-      number += add;
-    }
+      number += add; 
+    } 
   } 
 
   char* p = (char *) &number; 
