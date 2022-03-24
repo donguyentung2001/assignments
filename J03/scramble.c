@@ -16,6 +16,6 @@ int main() {
     new_phrase[i] = (char)((a|b)| c); 
   }
   new_phrase[strlen(phrase)] = '\0'; 
-  printf("scramble: %s \n", new_phrase); 
+  printf("scramble:%s\n", new_phrase); 
   return 0;
 }
