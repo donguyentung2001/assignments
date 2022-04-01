@@ -79,10 +79,10 @@ void fragstats(void* buffers[], int len) {
       used_chunks++; 
       int unused_mem = cnk->size-cnk->memory_used
       sum_unused += unused_mem; 
-      if (unused_mem > largest_used) { 
+      if (unused_mem > largest_unused) { 
         largest_unused = unused_mem; 
       }
-      if (smallest_unused == 0 || unused_mem < smallest_used) { 
+      if (smallest_unused == 0 || unused_mem < smallest_unused) { 
         smallest_unused = unused_mem; 
       }
     }
