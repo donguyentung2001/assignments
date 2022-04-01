@@ -6,8 +6,8 @@
 
 int main (int argc, char* argv[]) {
   void *init = sbrk(0);
-  printf("initial top of heap is %i", (int) init); 
+  printf("initial top of heap is %p", init); 
   void *new = sbrk(0); 
-  printf("new top of heap is %i", (int) new); 
+  printf("new top of heap is %p", new); 
   return 0 ;
 }
