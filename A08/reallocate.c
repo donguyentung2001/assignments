@@ -26,6 +26,8 @@ int main (int argc, char* argv[]) {
   void *new_final = sbrk(0); 
   printf("initial top of heap is %p. \n", init); 
   printf("New top of heap is %p. \n", final);
+  printf("initial top of heap is %p. \n", new_init); 
+  printf("New top of heap is %p. \n", new_final);
   printf("We have allocated %i bytes. \n", (int) (new_init - new_final)); 
 
   return 0 ;
