@@ -84,8 +84,7 @@ void fragstats(void* buffers[], int len) {
       //struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
     }
   }
-  printf("The number of free chunks is %i. \n", free_chunks); 
-  printf("The number of used chunks is %i. \n", used_chunks); 
+  printf("Total blocks: %i, Free: %i, Unused: %i. \n", free_chunks+used_chunks, free_chunks, used_chunks); 
 
 }
 
