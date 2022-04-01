@@ -65,10 +65,10 @@ void free(void *memory) {
 void fragstats(void* buffers[], int len) {
   int free_chunks = 0; 
   int used_chunks = 0; 
-  float sum_unused = 0; 
-  float largest_unused = 0; 
-  float smallest_unused = 0; 
-  float average_unused = 0; 
+  float sum_used = 0; 
+  float largest_used = 0; 
+  float smallest_used = 0; 
+  float average_used = 0; 
   //float largest_free = 0; 
   //float smallest_free = 0; 
   //float sum_free = 0;
