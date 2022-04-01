@@ -48,8 +48,9 @@ Why is the value 1040 bytes?
 
 How many bytes does `mylloc_list.c` allocate when the program ends? Explain why
 this amount makes sense.
-It allocates 0 byte. This is because whenever a new request for memory appears, we will fetch from the only free block on the free list.
-This means that keep allocating and freeing the same block of memory, which in the end makes us use 0 byte. 
+It allocates 116 byte. 
+Whenever we call malloc(100), we are actually calling sbrk(100 + sizeof(chunk)), and size of chunk is 16. So we are in fact setting aside 116 bytes in memory for each malloc(100) call. 
+
 
 = Fragmentation
 1. Fragmentation is when memory is allocated in non-contiguous blocks, making some of the memory unallocated but also unusable. 
