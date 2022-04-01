@@ -65,33 +65,34 @@ void free(void *memory) {
 void fragstats(void* buffers[], int len) {
   int free_chunks = 0; 
   int used_chunks = 0; 
-  //float sum_unused = 0; 
-  //float largest_unused = 0; 
-  //float smallest_unused = 0; 
-  //float average_unused = 0; 
-  float largest_free = 0; 
-  float smallest_free = 0; 
-  float sum_free = 0;
+  float sum_unused = 0; 
+  float largest_unused = 0; 
+  float smallest_unused = 0; 
+  float average_unused = 0; 
+  //float largest_free = 0; 
+  //float smallest_free = 0; 
+  //float sum_free = 0;
 
   for (int i = 0; i < len; i++) { 
-    struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
-    if (buffers[i] == NULL) { 
-      free_chunks++; 
-      sum_free += cnk->size; 
-      if (cnk->size > largest_free) { 
-        largest_free = cnk->size; 
-      }
-      if (smallest_free == 0 || cnk->size < smallest_free) { 
-        smallest_free = cnk->size; 
-      }
-    }
-    else {
+    if (buffers[i] != NULL) { 
+      struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
       used_chunks++; 
-      //struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
+      sum_used += cnk->size; 
+      if (cnk->size > largest_used) { 
+        largest_used = cnk->size; 
+      }
+      if (smallest_used == 0 || cnk->size < smallest_used) { 
+        smallest_used = cnk->size; 
+      }
     }
   }
+  struct chunk *current = flist; 
+  while (current != NULL) { 
+    free_chunks++; 
+    current = current.next; 
+  }
   printf("Total blocks: %i, Free: %i, Used: %i. \n", free_chunks+used_chunks, free_chunks, used_chunks); 
-  printf("Total size of free chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_free, largest_free, smallest_free, sum_free/free_chunks);
+  printf("Total size of used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_uesd, largest_used, smallest_used, sum_used/used_chunks);
 
 }
 
