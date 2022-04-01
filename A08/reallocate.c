@@ -8,6 +8,7 @@ int main (int argc, char* argv[]) {
   void *init; 
   void *final; 
   void *new_init = sbrk(0); 
+  void *new_test = sbrk(0); 
   for (int i = 0; i < 10; i++) { 
     void *alloc_memory = malloc(100); 
     if (alloc_memory == NULL) { 
@@ -28,6 +29,7 @@ int main (int argc, char* argv[]) {
   printf("New top of heap is %p. \n", final);
   printf("initial top of heap is %p. \n", new_init); 
   printf("New top of heap is %p. \n", new_final);
+  printf("New test is %p. \n", new_test);
   printf("We have allocated %i bytes. \n", (int) (new_init - new_final)); 
 
   return 0 ;
