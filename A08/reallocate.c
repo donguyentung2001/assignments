@@ -19,7 +19,9 @@ int main (int argc, char* argv[]) {
     if (i == 9) { 
       final = alloc_memory; 
     }
-    free(alloc_memory); 
+    if (i%2 == 0) {
+      free(alloc_memory); 
+    }
     alloc_memory = NULL; 
   }
   printf("initial top of heap is %p. \n", init); 
