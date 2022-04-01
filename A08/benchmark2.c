@@ -24,6 +24,7 @@ int main ( int argc, char* argv[]) {
   printf("The initial top of the heap is %p.\n", init);
   for (int j = 0 ; j < ROUNDS; j++) {
     for (int i= 0 ; i < LOOP ; i++) {
+      printf("loop: %i. \n"); 
       int index = rand() % BUFFER;
       if (buffer[index] != NULL) {
         free(buffer[index]);
