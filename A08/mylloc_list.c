@@ -72,11 +72,9 @@ void fragstats(void* buffers[], int len) {
   float largest_free = 0; 
   float smallest_free = 0; 
   float sum_free = 0;
-  float average_free = 0; 
-
 
   for (int i = 0; i < len; i++) { 
-    struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1)
+    struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
     if (buffers[i] == NULL) { 
       free_chunks++; 
       sum_free += cnk->size; 
