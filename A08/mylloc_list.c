@@ -100,6 +100,7 @@ void fragstats(void* buffers[], int len) {
   }
   printf("Total blocks: %i, Free: %i, Used: %i. \n", free_chunks+used_chunks, free_chunks, used_chunks); 
   printf("Total size of used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_used, largest_used, smallest_used, sum_used/used_chunks);
+  printf("Total size of free chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_free, largest_free, smallest_free, sum_free/free_chunks);
 
 }
 
