@@ -10,7 +10,7 @@ struct chunk {
 struct chunk *flist = NULL;
 
 void *malloc (size_t size) {
-  printf("using malloc.")
+  printf("using malloc.");
   if (size == 0){
     return NULL;
   }
