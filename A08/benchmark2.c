@@ -34,7 +34,7 @@ int main ( int argc, char* argv[]) {
         buffer[index] = NULL;
       } else {
         size_t size = (size_t) randExp(8, 4000); 
-        print("with size %i. \n", size);
+        printf("with size %i. \n", size);
         int *memory = NULL;
         printf("mallocing memory. \n"); 
         memory = malloc(size);
