@@ -27,12 +27,16 @@ int main ( int argc, char* argv[]) {
       printf("loop: %i. \n", i); 
       int index = rand() % BUFFER;
       if (buffer[index] != NULL) {
+        print("freeing memory. \n"); 
         free(buffer[index]);
+        printf("done freeing. \n"); 
         buffer[index] = NULL;
       } else {
         size_t size = (size_t) randExp(8, 4000); 
         int *memory = NULL;
+        printf("mallocing memory. \n"); 
         memory = malloc(size);
+        printf("done malloc. \n"); 
 
         if (memory == NULL) {
           fprintf(stderr, "malloc failed\n");

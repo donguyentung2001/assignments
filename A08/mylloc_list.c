@@ -21,6 +21,7 @@ void *malloc (size_t size) {
   struct chunk *prev = NULL;
 
   while (next != NULL) { 
+    printf("looping through free list. \n"); 
     if (next->size >= size) { 
       if (min_size == -1 || next->size < min_size) { 
         best_prev = prev; 
@@ -31,7 +32,9 @@ void *malloc (size_t size) {
     prev = next; 
     next = next->next; 
   }
+  printf("done looping. \n"); 
   if (best_next != NULL) { 
+    printf("found best_next. \n"); 
     best_next->memory_used = size; 
     if (best_prev != NULL) { 
       best_prev->next = best_next; 
