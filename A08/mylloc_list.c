@@ -14,23 +14,29 @@ void *malloc (size_t size) {
   if (size == 0){
     return NULL;
   }
-
+  int min_size = -1; 
+  struct chunk *best_prev = NULL;  
+  struct chunk *best_next = NULL; 
   struct chunk *next = flist; 
   struct chunk *prev = NULL;
 
   while (next != NULL) { 
     if (next->size >= size) { 
-      if (prev != NULL) { 
-        prev->next = next -> next;
+      if (min_size == -1 || next->size < min_size) { 
+        best_prev = prev; 
+        best_next = next; 
+        min_size = next->size; 
       }
-      else { 
-        flist = next->next;
-      }
-      return (void*) (next + 1); 
+    }
+    prev = next; 
+    next = next->next; 
+  }
+  if (best_next != NULL) { 
+    if (best_prev != NULL) { 
+      best_prev.next = best_next; 
     }
     else { 
-      prev = next; 
-      next = next->next; 
+      flist = best_next->next; 
     }
   }
 
