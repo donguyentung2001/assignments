@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 struct chunk {
+  int memory_used; 
   int size;
   struct chunk *next;
 
@@ -10,7 +11,6 @@ struct chunk {
 struct chunk *flist = NULL;
 
 void *malloc (size_t size) {
-  printf("using malloc.");
   if (size == 0){
     return NULL;
   }
@@ -39,6 +39,8 @@ void *malloc (size_t size) {
     return NULL;
   } else {
     struct chunk* cnk = (struct chunk*) memory;
+    cnk->size = size; 
+    cnk->memory_used = size; 
     return (void*) (cnk + 1);
   }
 }
@@ -47,6 +49,7 @@ void free(void *memory) {
   if (memory!= NULL) { 
     struct chunk *cnk = (struct chunk*) ((struct chunk*) memory -1);
     cnk->next = flist; 
+    cnk->memory_used = 0; 
     flist = cnk; 
   }
   return;
