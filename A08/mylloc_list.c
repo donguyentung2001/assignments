@@ -4,13 +4,12 @@
 
 struct chunk {
   int size;
-  int memory_in_use; 
+  int memory_used; 
   struct chunk *next;
 };
 struct chunk *flist = NULL;
 
 void *malloc (size_t size) {
-  print("using our malloc. \n"); 
   if (size == 0){
     return NULL;
   }
@@ -26,6 +25,7 @@ void *malloc (size_t size) {
       else { 
         flist = next->next;
       }
+      next->memory_used = size; 
       return (void*) (next + 1); 
     }
     else { 
@@ -40,6 +40,7 @@ void *malloc (size_t size) {
   } else {
     struct chunk* cnk = (struct chunk*) memory;
     cnk->size = size; 
+    cnk->memory_used = size; 
     return (void*) (cnk + 1);
   }
 }
@@ -48,6 +49,7 @@ void free(void *memory) {
   if (memory!= NULL) { 
     struct chunk *cnk = (struct chunk*) ((struct chunk*) memory -1);
     cnk->next = flist; 
+    cnk->memory_used = 0; 
     flist = cnk; 
   }
   return;
