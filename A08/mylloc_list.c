@@ -77,7 +77,7 @@ void fragstats(void* buffers[], int len) {
     if (buffers[i] != NULL) { 
       struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
       used_chunks++; 
-      int unused_mem = cnk->size-cnk->memory_used
+      int unused_mem = cnk->size-cnk->memory_used;
       sum_unused += unused_mem; 
       if (unused_mem > largest_unused) { 
         largest_unused = unused_mem; 
