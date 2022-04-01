@@ -68,7 +68,6 @@ void fragstats(void* buffers[], int len) {
   float sum_used = 0; 
   float largest_used = 0; 
   float smallest_used = 0; 
-  float average_used = 0; 
   //float largest_free = 0; 
   //float smallest_free = 0; 
   //float sum_free = 0;
@@ -89,10 +88,10 @@ void fragstats(void* buffers[], int len) {
   struct chunk *current = flist; 
   while (current != NULL) { 
     free_chunks++; 
-    current = current.next; 
+    current = current->next; 
   }
   printf("Total blocks: %i, Free: %i, Used: %i. \n", free_chunks+used_chunks, free_chunks, used_chunks); 
-  printf("Total size of used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_uesd, largest_used, smallest_used, sum_used/used_chunks);
+  printf("Total size of used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_used, largest_used, smallest_used, sum_used/used_chunks);
 
 }
 
