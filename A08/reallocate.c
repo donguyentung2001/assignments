@@ -8,6 +8,7 @@ int main (int argc, char* argv[]) {
   void *init; 
   void *final; 
   void *new_init = sbrk(0); 
+  void *new_test; 
   for (int i = 0; i < 10; i++) { 
     void *alloc_memory = malloc(100); 
     if (alloc_memory == NULL) { 
@@ -15,7 +16,7 @@ int main (int argc, char* argv[]) {
       exit(1); 
     }
     if (i==0) {
-      void *new_test = sbrk(0); 
+      new_test = sbrk(0); 
       init = alloc_memory; 
     }
     if (i == 9) { 
