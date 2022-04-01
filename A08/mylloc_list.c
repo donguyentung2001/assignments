@@ -33,7 +33,7 @@ void *malloc (size_t size) {
   }
   if (best_next != NULL) { 
     if (best_prev != NULL) { 
-      best_prev.next = best_next; 
+      best_prev->next = best_next; 
     }
     else { 
       flist = best_next->next; 
