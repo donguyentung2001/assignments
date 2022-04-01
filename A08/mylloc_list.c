@@ -34,7 +34,7 @@ void *malloc (size_t size) {
   if (best_next != NULL) { 
     best_next->memory_used = size; 
     if (best_prev != NULL) { 
-      best_prev->next = best_next; 
+      best_prev->next = best_next->next; 
     }
     else { 
       flist = best_next->next; 
