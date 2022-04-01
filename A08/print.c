@@ -15,6 +15,6 @@ int main (int argc, char* argv[]) {
   void *new = sbrk(0); 
   printf("new top of heap is %p. \n", new);
   printf("We have allocated %i bytes. \n", (int) (new - init));  
-  printf("size of chunk %i. \n", sizeof(struct chunk*))
+  printf("size of chunk %i. \n", sizeof(struct chunk*));
   return 0 ;
 }
