@@ -5,11 +5,12 @@
 struct chunk {
   int size;
   struct chunk *next;
-  
+
 };
 struct chunk *flist = NULL;
 
 void *malloc (size_t size) {
+  printf("using malloc.")
   if (size == 0){
     return NULL;
   }
