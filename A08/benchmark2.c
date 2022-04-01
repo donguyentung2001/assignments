@@ -27,7 +27,7 @@ int main ( int argc, char* argv[]) {
       printf("loop: %i. \n", i); 
       int index = rand() % BUFFER;
       if (buffer[index] != NULL) {
-        print("freeing memory. \n"); 
+        printf("freeing memory. \n"); 
         free(buffer[index]);
         printf("done freeing. \n"); 
         buffer[index] = NULL;
