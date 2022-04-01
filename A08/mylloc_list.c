@@ -66,9 +66,9 @@ void free(void *memory) {
 void fragstats(void* buffers[], int len) {
   int free_chunks = 0; 
   int used_chunks = 0; 
-  float sum_used = 0; 
-  float largest_used = 0; 
-  float smallest_used = 0; 
+  float sum_unused = 0; 
+  float largest_unused = 0; 
+  float smallest_unused = 0; 
   float largest_free = 0; 
   float smallest_free = 0; 
   float sum_free = 0;
@@ -77,12 +77,13 @@ void fragstats(void* buffers[], int len) {
     if (buffers[i] != NULL) { 
       struct chunk *cnk = (struct chunk*) ((struct chunk*) buffers[i] -1);
       used_chunks++; 
-      sum_used += cnk->size; 
-      if (cnk->size > largest_used) { 
-        largest_used = cnk->size; 
+      int unused_mem = cnk->size-cnk->memory_used
+      sum_unused += unused_mem; 
+      if (unused_mem > largest_used) { 
+        largest_unused = unused_mem; 
       }
-      if (smallest_used == 0 || cnk->size < smallest_used) { 
-        smallest_used = cnk->size; 
+      if (smallest_unused == 0 || unused_mem < smallest_used) { 
+        smallest_unused = unused_mem; 
       }
     }
   }
@@ -99,7 +100,7 @@ void fragstats(void* buffers[], int len) {
     current = current->next; 
   }
   printf("Total blocks: %i, Free: %i, Used: %i. \n", free_chunks+used_chunks, free_chunks, used_chunks); 
-  printf("Total size of used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_used, largest_used, smallest_used, sum_used/used_chunks);
+  printf("Total size of unused memory in used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_unused, largest_unused, smallest_unused, sum_unused/used_chunks);
   printf("Total size of free chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_free, largest_free, smallest_free, sum_free/free_chunks);
 
 }
