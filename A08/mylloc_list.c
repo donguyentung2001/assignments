@@ -3,43 +3,35 @@
 #include <unistd.h>
 
 struct chunk {
-  int memory_used; 
   int size;
+  int memory_in_use; 
   struct chunk *next;
-
 };
 struct chunk *flist = NULL;
 
 void *malloc (size_t size) {
+  print("using our malloc. \n"); 
   if (size == 0){
     return NULL;
   }
-  int min_size = -1; 
-  struct chunk *best_prev = NULL;  
-  struct chunk *best_next = NULL; 
+
   struct chunk *next = flist; 
   struct chunk *prev = NULL;
 
   while (next != NULL) { 
     if (next->size >= size) { 
-      if (min_size == -1 || next->size < min_size) { 
-        best_prev = prev; 
-        best_next = next; 
-        min_size = next->size; 
+      if (prev != NULL) { 
+        prev->next = next -> next;
       }
-    }
-    prev = next; 
-    next = next->next; 
-  }
-  if (best_next != NULL) { 
-    best_next->memory_used = size; 
-    if (best_prev != NULL) { 
-      best_prev->next = best_next->next; 
+      else { 
+        flist = next->next;
+      }
+      return (void*) (next + 1); 
     }
     else { 
-      flist = best_next->next; 
+      prev = next; 
+      next = next->next; 
     }
-    return (void*) (best_next+1); 
   }
 
   void *memory = sbrk(size + sizeof(struct chunk));
@@ -48,7 +40,6 @@ void *malloc (size_t size) {
   } else {
     struct chunk* cnk = (struct chunk*) memory;
     cnk->size = size; 
-    cnk->memory_used = size; 
     return (void*) (cnk + 1);
   }
 }
@@ -57,7 +48,6 @@ void free(void *memory) {
   if (memory!= NULL) { 
     struct chunk *cnk = (struct chunk*) ((struct chunk*) memory -1);
     cnk->next = flist; 
-    cnk->memory_used = 0; 
     flist = cnk; 
   }
   return;
@@ -100,8 +90,7 @@ void fragstats(void* buffers[], int len) {
     current = current->next; 
   }
   printf("Total blocks: %i, Free: %i, Used: %i. \n", free_chunks+used_chunks, free_chunks, used_chunks); 
-  printf("Total size of unused memory in used chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_unused, largest_unused, smallest_unused, sum_unused/used_chunks);
-  printf("Total size of free chunks: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_free, largest_free, smallest_free, sum_free/free_chunks);
-
+  printf("Internal unused: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_unused, largest_unused, smallest_unused, sum_unused/used_chunks);
+  printf("External unused: %f, Largest: %f, Smallest: %f, Average: %f. \n", sum_free, largest_free, smallest_free, sum_free/free_chunks);
 }
 
