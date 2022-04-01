@@ -39,6 +39,7 @@ void *malloc (size_t size) {
     else { 
       flist = best_next->next; 
     }
+    return (void*) (best_next+1); 
   }
 
   void *memory = sbrk(size + sizeof(struct chunk));
