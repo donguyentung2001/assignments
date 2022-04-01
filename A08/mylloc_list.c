@@ -4,11 +4,13 @@
 
 struct chunk {
   int size;
+  int memory_in_use; 
   struct chunk *next;
 };
 struct chunk *flist = NULL;
 
 void *malloc (size_t size) {
+  print("using our malloc. \n"); 
   if (size == 0){
     return NULL;
   }
