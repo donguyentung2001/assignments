@@ -7,9 +7,6 @@
 int main (int argc, char* argv[]) {
   void *init = sbrk(0); 
   for (int i = 0; i < 10; i++) { 
-    if (i==0) { 
-      new_test = sbrk(0); 
-    }
     void *alloc_memory = malloc(100); 
     if (alloc_memory == NULL) { 
       printf("Fail to allocate memory. \n"); 
