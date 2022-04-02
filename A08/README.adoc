@@ -44,7 +44,7 @@ In `simple.c`, where does the increase in 1040 bytes come from?
 The increase in 1040 bytes come from the fact that printf has to allocate memory for stdout. 
 
 Why is the value 1040 bytes?
-
+By default, printf will allocate 1040 bytes to print the string.
 
 How many bytes does `mylloc_list.c` allocate when the program ends? Explain why
 this amount makes sense.
@@ -54,8 +54,8 @@ Whenever we call malloc(100), we are actually calling sbrk(100 + sizeof(chunk)),
 
 = Fragmentation
 1. Fragmentation is when memory is allocated in non-contiguous blocks, making some of the memory unallocated but also unusable. 
-Internal fragmentation is the total amoung of unused memory on used chunks. 
-External fragmentation is the total amount of freed chunks on the free list. 
+Internal fragmentation is the total amount of unused memory on used chunks. 
+External fragmentation is the total amount of memory on free chunks on the free list. 
 
 2. 
 - Output of benchmark1 
