@@ -1,9 +1,41 @@
 = Hardware specifications
 
 Where did your run your tests? A laptop, or goldengate?
+I run my tests on goldengate. 
 
 What are the performance specifications of the machine: number and speed of
 processors, size of RAM? (use `lscpu` and `free -m`)
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+Address sizes:                   46 bits physical, 48 bits virtual
+CPU(s):                          64
+On-line CPU(s) list:             0-63
+Thread(s) per core:              2
+Core(s) per socket:              16
+Socket(s):                       2
+NUMA node(s):                    2
+Vendor ID:                       GenuineIntel
+CPU family:                      6
+Model:                           85
+Model name:                      Intel(R) Xeon(R) Gold 6246R CPU @ 3.40GHz
+Stepping:                        7
+CPU MHz:                         1200.050
+CPU max MHz:                     4100.0000
+CPU min MHz:                     1200.0000
+BogoMIPS:                        6800.00
+Virtualization:                  VT-x
+L1d cache:                       1 MiB
+L1i cache:                       1 MiB
+L2 cache:                        32 MiB
+L3 cache:                        71.5 MiB
+NUMA node0 CPU(s):               0-15,32-47
+NUMA node1 CPU(s):               16-31,48-63
+
+
+total        used        free      shared  buff/cache   available
+Mem:          95320       11274       71017           4       13028       83211
+Swap:          8191        1167        7024
 
 = Single-process mandelbrot
 
@@ -13,11 +45,11 @@ the amount of time it takes to compute each image.
 [cols="1,1"]
 !===
 | Size | Time (s) 
-| 100 | todo
-| 400 | todo
-| 800 | todo
-| 1000 | todo
-| 2000 | todo
+| 100 | 0.366105
+| 400 | 5.763370 
+| 800 | 22.996740
+| 1000 | 35.908484
+| 2000 | 143.467370
 !===
 
 = Multi-process mandelbrot
