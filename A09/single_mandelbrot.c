@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <string.h> 
 #include <sys/time.h>
 #include "read_ppm.h"
 
@@ -12,7 +13,6 @@ int main(int argc, char* argv[]) {
   float ymin = -1.12;
   float ymax = 1.12;
   int maxIterations = 1000;
-
   int opt;
   while ((opt = getopt(argc, argv, ":s:l:r:t:b:")) != -1) {
     switch (opt) {
@@ -30,8 +30,67 @@ int main(int argc, char* argv[]) {
 
   // todo: your work here
   // generate pallet
+
+  struct ppm_pixel* palette = malloc(sizeof(struct ppm_pixel)*1000); 
+  struct ppm_pixel current_color;
   srand(time(0));
+  for (int i=0; i<maxIterations; i++) { 
+    current_color.red = rand() % 255; 
+    current_color.green = rand() % 255; 
+    current_color.blue = rand() % 255;
+    palette[i] = current_color;
+  }
 
   // compute image
+  float begin = time(0); 
+  struct ppm_pixel* image = malloc(sizeof(struct ppm_pixel)*size*size); 
+  struct ppm_pixel image_color; 
+  for (int row = 0; row < size; row++) { 
+    for (int col = 0; col < size; col++) { 
+      float xfrac = (float)row/ (float)size; 
+      float yfrac = (float) col/(float)size; 
+      float x0 = xmin + xfrac * (xmax - xmin); 
+      float y0 = ymin + yfrac * (ymax - ymin); 
+      
+      float x = 0; 
+      float y = 0; 
+      int iter = 0; 
+      while (iter < maxIterations && (x*x + y*y < 2*2)) { 
+        float xtmp = x*x - y*y + x0; 
+        y = 2*x*y + y0; 
+        x = xtmp; 
+        iter++; 
+      }
+      if (iter < maxIterations) { 
+        image_color = palette[iter]; 
+      }
+      else { 
+        image_color.red = 0; 
+        image_color.green = 0; 
+        image_color.blue = 0; 
+      }
+      image[row*size + col] = image_color; 
+    }
+  }
+  float end = time(0); 
+  printf("begin time is %f. \n", begin);
+  printf("end time is %f. \n", end);
+  printf("Computed mandelbrot set (%ix%i) in %f seconds. \n", size, size, end-begin); 
+  char output_filename[100]; 
+  char size_char[8];
+  char time_char[50]; 
+  time_t second = time(0); 
+  sprintf(size_char, "%d", size); 
+  sprintf(time_char, "%ld", second); 
+  strcpy(output_filename, "mandelbrot-"); 
+  strcat(output_filename, size_char); 
+  strcat(output_filename, "-"); 
+  strcat(output_filename, time_char); 
+  strcat(output_filename,".png"); 
+  write_ppm(output_filename, image, size, size); 
+  free(palette);
+  palette = NULL;
+  free(image); 
+  image = NULL; 
 
 }
