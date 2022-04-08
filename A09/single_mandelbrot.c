@@ -42,16 +42,18 @@ int main(int argc, char* argv[]) {
   }
 
   // compute image
-  float begin = time(0); 
+  struct timeval tstart, tend;
+  double timer; 
   struct ppm_pixel* image = malloc(sizeof(struct ppm_pixel)*size*size); 
   struct ppm_pixel image_color; 
+  gettimeofday(&tstart, NULL);
   for (int row = 0; row < size; row++) { 
     for (int col = 0; col < size; col++) { 
       float xfrac = (float)row/ (float)size; 
       float yfrac = (float) col/(float)size; 
       float x0 = xmin + xfrac * (xmax - xmin); 
       float y0 = ymin + yfrac * (ymax - ymin); 
-      
+  
       float x = 0; 
       float y = 0; 
       int iter = 0; 
@@ -72,10 +74,9 @@ int main(int argc, char* argv[]) {
       image[row*size + col] = image_color; 
     }
   }
-  float end = time(0); 
-  printf("begin time is %f. \n", begin);
-  printf("end time is %f. \n", end);
-  printf("Computed mandelbrot set (%ix%i) in %f seconds. \n", size, size, end-begin); 
+  gettimeofday(&tend, NULL);
+  timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
+  printf("Compute mandelbrot set of size (%i, %i) in %f second(s). \n", size, size, timer); 
   char output_filename[100]; 
   char size_char[8];
   char time_char[50]; 
