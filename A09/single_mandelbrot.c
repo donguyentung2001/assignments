@@ -47,8 +47,8 @@ int main(int argc, char* argv[]) {
   struct ppm_pixel* image = malloc(sizeof(struct ppm_pixel)*size*size); 
   struct ppm_pixel image_color; 
   gettimeofday(&tstart, NULL);
-  for (int row = 0; row < size; row++) { 
-    for (int col = 0; col < size; col++) { 
+  for (int col = 0; col < size; col++) { 
+    for (int row = 0; row < size; row++) { 
       float xfrac = (float)row/ (float)size; 
       float yfrac = (float) col/(float)size; 
       float x0 = xmin + xfrac * (xmax - xmin); 
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
         image_color.green = 0; 
         image_color.blue = 0; 
       }
-      image[row*size + col] = image_color; 
+      image[col*size + row] = image_color; 
     }
   }
   gettimeofday(&tend, NULL);
@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
   strcat(output_filename, size_char); 
   strcat(output_filename, "-"); 
   strcat(output_filename, time_char); 
-  strcat(output_filename,".png"); 
+  strcat(output_filename,".ppm"); 
   write_ppm(output_filename, image, size, size); 
   free(palette);
   palette = NULL;

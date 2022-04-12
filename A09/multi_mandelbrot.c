@@ -104,8 +104,8 @@ int main(int argc, char* argv[]) {
     }
     if (pid==0) { 
       printf("Computing subimage block with row(%i, %i) and col(%i,%i). \n", row_start, row_end, col_start, col_end); 
-      for (int row = row_start; row < row_end; row++) { 
-        for (int col = col_start; col < col_end; col++) { 
+      for (int col = col_start; col < col_end; col++) { 
+        for (int row = row_start; row < row_end; row++) { 
           float xfrac = (float)row/ (float)size; 
           float yfrac = (float) col/(float)size; 
           float x0 = xmin + xfrac * (xmax - xmin); 
@@ -128,7 +128,7 @@ int main(int argc, char* argv[]) {
             image_color.green = 0; 
             image_color.blue = 0; 
           }
-          image[row*size + col] = image_color; 
+          image[col*size + row] = image_color; 
         }
       }
       exit(0); 
@@ -157,7 +157,7 @@ int main(int argc, char* argv[]) {
   strcat(output_filename, size_char); 
   strcat(output_filename, "-"); 
   strcat(output_filename, time_char); 
-  strcat(output_filename,".png"); 
+  strcat(output_filename,".ppm"); 
   write_ppm(output_filename, image, size, size); 
   free(palette);
   palette = NULL;
