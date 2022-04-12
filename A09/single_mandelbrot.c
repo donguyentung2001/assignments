@@ -31,7 +31,11 @@ int main(int argc, char* argv[]) {
   // todo: your work here
   // generate pallet
 
-  struct ppm_pixel* palette = malloc(sizeof(struct ppm_pixel)*1000); 
+  struct ppm_pixel* palette = malloc(sizeof(struct ppm_pixel)*1000);
+  if (palette == NULL) { 
+    printf("Cannot allocate memory"); 
+    exit(1); 
+  } 
   struct ppm_pixel current_color;
   srand(time(0));
   for (int i=0; i<maxIterations; i++) { 
@@ -45,6 +49,10 @@ int main(int argc, char* argv[]) {
   struct timeval tstart, tend;
   double timer; 
   struct ppm_pixel* image = malloc(sizeof(struct ppm_pixel)*size*size); 
+  if (image == NULL) { 
+    printf("Cannot allocat memory"); 
+    exit(1); 
+  }
   struct ppm_pixel image_color; 
   gettimeofday(&tstart, NULL);
   for (int col = 0; col < size; col++) { 
