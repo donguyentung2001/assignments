@@ -47,7 +47,7 @@ void * compute_image(void* args) {
   int row_end = data->row_end; 
   int* membership = data->membership; 
   int* count = data->count; 
-  printf("count element is ", count[1000]); 
+  printf("count element is %i ", count[1000]); 
   printf("Thread %i is computing subimage block with row(%i, %i) and col(%i,%i). \n", data->id, row_start, row_end, col_start, col_end);
   pthread_mutex_lock(&mutex); 
   // perform step 1
