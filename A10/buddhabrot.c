@@ -106,7 +106,7 @@ void * compute_image(void* args) {
   pthread_mutex_unlock(&mutex);
   // use a thread barrier to wait for all threads to finish steps 1 and 2
   pthread_barrier_wait(&barrier);
-  printf("Current max count is %i", max_count)
+  printf("Current max count is %i", max_count);
 
   // perform step 3
   float gamma = 0.681;
