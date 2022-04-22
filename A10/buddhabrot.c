@@ -33,7 +33,7 @@ struct image_data {
 
 void * compute_image(void* args) {
   struct image_data *data = (struct image_data *) args;
-  printf("Entering thread %i", data->id);
+  printf("Entering thread %i \n", data->id);
   float xmin = -2.0;
   float xmax = 0.47;
   float ymin = -1.12;
@@ -49,7 +49,6 @@ void * compute_image(void* args) {
   int* membership = data->membership; 
   int* count = data->count; 
   printf("Thread %i is computing subimage block with row(%i, %i) and col(%i,%i). \n", data->id, row_start, row_end, col_start, col_end);
-  pthread_mutex_lock(&mutex); 
   // perform step 1
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
@@ -75,6 +74,7 @@ void * compute_image(void* args) {
         }
       }
     }
+  pthread_mutex_lock(&mutex); 
   printf("Thread %i finished step 1. \n", id); 
   // perform step 2
   for (int col = col_start; col < col_end; col++) { 
@@ -105,8 +105,8 @@ void * compute_image(void* args) {
       }
   }
   printf("Thread %i finished step 2. \n", id); 
-  pthread_barrier_wait(&barrier);
   pthread_mutex_unlock(&mutex);
+  pthread_barrier_wait(&barrier);
   // use a thread barrier to wait for all threads to finish steps 1 and 2
 
   // perform step 3
