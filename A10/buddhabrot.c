@@ -39,6 +39,7 @@ void * compute_image(void* args) {
   int maxIterations = 1000;
   struct ppm_pixel image_color;
   struct image_data *data = (struct image_data *) args;
+  int id = data->id; 
   int size = data->size;
   int col_start = data->col_start; 
   int row_start = data->row_start; 
@@ -46,6 +47,7 @@ void * compute_image(void* args) {
   int row_end = data->row_end; 
   int* membership = data->membership; 
   int* count = data->count; 
+  printf("Thread %i is computing subimage block with row(%i, %i) and col(%i,%i). \n", data->id, row_start, row_end, col_start, col_end);
   pthread_mutex_lock(&mutex); 
   // perform step 1
   for (int col = col_start; col < col_end; col++) { 
@@ -72,6 +74,7 @@ void * compute_image(void* args) {
         }
       }
     }
+  printf("Thread %i finished step 1", id); 
   // perform step 2
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
@@ -99,6 +102,7 @@ void * compute_image(void* args) {
         }
       }
   }
+  printf("Thread %i finished step 2", id); 
   pthread_mutex_unlock(&mutex);
   // use a thread barrier to wait for all threads to finish steps 1 and 2
   pthread_barrier_wait(&barrier);
@@ -119,7 +123,7 @@ void * compute_image(void* args) {
         data->image[col*data->size + row] = image_color; 
       }
   }
-
+  printf("Thread %i finished. \n", data->id); 
   return (void*) NULL;
 }
 
