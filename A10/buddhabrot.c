@@ -174,6 +174,7 @@ int main(int argc, char* argv[]) {
   double timer; 
   gettimeofday(&tstart, NULL);
   pthread_mutex_init(&mutex, NULL);
+  pthread_barrier_init(&barrier, NULL);
   for (int i = 0; i <4; i++) { 
     int col_start;
     int row_start;
