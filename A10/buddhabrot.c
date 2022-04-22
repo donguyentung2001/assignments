@@ -101,7 +101,7 @@ void * compute_image(void* args) {
   }
   pthread_mutex_unlock(&mutex);
   // use a thread barrier to wait for all threads to finish steps 1 and 2
-  pthread_barrier_wait(barrier);
+  pthread_barrier_wait(&barrier);
 
   // perform step 3
   float gamma = 0.681;
@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < 4; i++) {
       pthread_join(threads[i], NULL);
     }
-    pthread_barrier_destroy(barrier);
+    pthread_barrier_destroy(&barrier);
     pthread_mutex_destroy(&mutex); 
 
     gettimeofday(&tend, NULL);
