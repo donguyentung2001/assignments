@@ -1,4 +1,3 @@
-#define _POSIX_C_SOURCE 200112L /* Or higher */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -33,7 +32,6 @@ struct image_data {
 
 void * compute_image(void* args) {
   struct image_data *data = (struct image_data *) args;
-  printf("Entering thread %i \n", data->id);
   float xmin = -2.0;
   float xmax = 0.47;
   float ymin = -1.12;
@@ -75,7 +73,6 @@ void * compute_image(void* args) {
       }
     }
   pthread_mutex_lock(&mutex); 
-  printf("Thread %i finished step 1. \n", id); 
   // perform step 2
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
@@ -104,25 +101,31 @@ void * compute_image(void* args) {
         }
       }
   }
-  printf("Thread %i finished step 2. \n", id); 
   pthread_mutex_unlock(&mutex);
-  pthread_barrier_wait(&barrier);
   // use a thread barrier to wait for all threads to finish steps 1 and 2
-
+  pthread_barrier_wait(&barrier);
   // perform step 3
   float gamma = 0.681;
   float factor = 1.0/gamma;
-  printf("Thread %i is doing step 3", id); 
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
-        int value = 0; 
+        float value = 0; 
         if (count[row*size+col] > 0) { 
+          //printf("max count is %llu\n", max_count); 
+          //printf("log max count is %f\n", log(max_count)); 
+          //printf("count at the current index is %i \n", count[row*size+col]); 
+          //printf("log count at the current index is %f \n", log(count[row*size+col])); 
+          //printf("changing value. \n"); 
+          //float k = log(count[row*size+col])/ log(max_count); 
+          //printf(" k is %f \n", k); 
           value = log(count[row*size+col])/ log(max_count); 
+          //printf("After log, value is %f \n", value); 
           value = pow(value, factor); 
+          //printf("After pow, value is %f \n", value); 
         }
-        image_color.red = value *255; 
-        image_color.green= value *255; 
-        image_color.blue = value *255; 
+        image_color.red = round(value *255); 
+        image_color.green= round(value *255); 
+        image_color.blue = round(value *255); 
         data->image[col*data->size + row] = image_color; 
       }
   }
@@ -223,7 +226,7 @@ int main(int argc, char* argv[]) {
 
     gettimeofday(&tend, NULL);
     timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
-    printf("Compute mandelbrot set of size (%i, %i) in %f second(s). \n", size, size, timer); 
+    printf("Compute buddhabrot set of size (%i, %i) in %f second(s). \n", size, size, timer); 
     char output_filename[100]; 
     char size_char[8];
     char time_char[50]; 
