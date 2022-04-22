@@ -32,13 +32,14 @@ struct image_data {
 }; 
 
 void * compute_image(void* args) {
+  struct image_data *data = (struct image_data *) args;
+  printf("Entering thread %i", data->id);
   float xmin = -2.0;
   float xmax = 0.47;
   float ymin = -1.12;
   float ymax = 1.12;
   int maxIterations = 1000;
   struct ppm_pixel image_color;
-  struct image_data *data = (struct image_data *) args;
   int id = data->id; 
   int size = data->size;
   int col_start = data->col_start; 
@@ -52,8 +53,8 @@ void * compute_image(void* args) {
   // perform step 1
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
-        float xfrac = (float)row/ (float)data->size; 
-        float yfrac = (float) col/(float)data->size; 
+        float xfrac = (float)row/ (float)size; 
+        float yfrac = (float) col/(float)size; 
         float x0 = xmin + xfrac * (xmax - xmin); 
         float y0 = ymin + yfrac * (ymax - ymin); 
     
