@@ -90,8 +90,8 @@ void * compute_image(void* args) {
             float xtmp = x*x - y*y + x0; 
             y = 2*x*y + y0; 
             x = xtmp; 
-            int yrow = round(size * (y - ymin)/(ymax - ymax));
-            int xcol = round(size * (x - xmin)/(xmax - xmax));
+            int yrow = round(size * (y - ymin)/(ymax - ymin));
+            int xcol = round(size * (x - xmin)/(xmax - xmin));
             if (!((yrow < 0 || yrow >= size) || (xcol < 0 || xcol >= size))) {
               count[yrow*size + xcol]++; 
               if (count[yrow*size + xcol] > max_count) { 
