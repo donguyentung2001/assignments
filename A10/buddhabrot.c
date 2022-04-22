@@ -111,6 +111,7 @@ void * compute_image(void* args) {
   // perform step 3
   float gamma = 0.681;
   float factor = 1.0/gamma;
+  printf("Thread %i is doing step 3", id); 
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
         int value = 0; 
