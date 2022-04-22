@@ -96,7 +96,7 @@ void * compute_image(void* args) {
               count[yrow*size + xcol]++; 
               if (count[yrow*size + xcol] > max_count) { 
               max_count = count[yrow*size + xcol]; 
-              printf("Using thread %i, current max count is %l. \n", id, max_count);
+              printf("Using thread %i, current max count is %llu. \n", id, max_count);
               }
             }
           }
