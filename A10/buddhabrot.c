@@ -232,4 +232,8 @@ int main(int argc, char* argv[]) {
     //free memory 
     free(image); 
     image = NULL; 
+    free(membership); 
+    membership = NULL; 
+    free(count); 
+    count = NULL; 
 }
