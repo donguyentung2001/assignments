@@ -15,7 +15,7 @@
 #include <math.h>
 
 
-int max_count = 0; 
+static unsigned long long max_count = 0;
 pthread_mutex_t mutex; 
 pthread_barrier_t barrier;
 
@@ -96,7 +96,7 @@ void * compute_image(void* args) {
               count[yrow*size + xcol]++; 
               if (count[yrow*size + xcol] > max_count) { 
               max_count = count[yrow*size + xcol]; 
-              printf("Using thread %i, current max count is %i. \n", id, max_count);
+              printf("Using thread %i, current max count is %l. \n", id, max_count);
               }
             }
           }
