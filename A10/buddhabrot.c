@@ -105,9 +105,9 @@ void * compute_image(void* args) {
       }
   }
   printf("Thread %i finished step 2. \n", id); 
+  pthread_barrier_wait(&barrier);
   pthread_mutex_unlock(&mutex);
   // use a thread barrier to wait for all threads to finish steps 1 and 2
-  pthread_barrier_wait(&barrier);
 
   // perform step 3
   float gamma = 0.681;
