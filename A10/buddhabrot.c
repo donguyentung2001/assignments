@@ -96,6 +96,7 @@ void * compute_image(void* args) {
             if (!((yrow < 0 || yrow >= size) || (xcol < 0 || xcol >= size))) {
               count[yrow*size + xcol]++; 
             }
+            printf("Current count is %i \n",count[yrow*size + xcol] )
             if (count[yrow*size + xcol] > max_count) { 
               max_count = count[yrow*size + xcol]; 
             }
