@@ -79,7 +79,7 @@ void * compute_image(void* args) {
   for (int col = col_start; col < col_end; col++) { 
       for (int row = row_start; row < row_end; row++) { 
         if (membership[row*size+col] == 0) { 
-          float xfrac = (float)row/ (float)size; 
+          float xfrac = (float)row/(float)size; 
           float yfrac = (float) col/(float)size; 
           float x0 = xmin + xfrac * (xmax - xmin); 
           float y0 = ymin + yfrac * (ymax - ymin); 
@@ -96,7 +96,7 @@ void * compute_image(void* args) {
               count[yrow*size + xcol]++; 
               if (count[yrow*size + xcol] > max_count) { 
               max_count = count[yrow*size + xcol]; 
-              printf("Current max count is %i", max_count);
+              printf("Using thread %i, current max count is %i. \n", id, max_count);
               }
             }
           }
