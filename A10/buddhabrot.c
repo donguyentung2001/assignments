@@ -94,7 +94,7 @@ void * compute_image(void* args) {
             int yrow = round(size * (y - ymin)/(ymax - ymax));
             int xcol = round(size * (x - xmin)/(xmax - xmax));
             if (!((yrow < 0 || yrow >= size) || (xcol < 0 || xcol >= size))) {
-              count[yrow*size + xcol] += 1; 
+              count[yrow*size + xcol]++; 
             }
             if (count[yrow*size + xcol] > max_count) { 
               max_count = count[yrow*size + xcol]; 
